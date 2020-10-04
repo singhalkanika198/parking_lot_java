@@ -1,4 +1,4 @@
-``````__``````# Description
+## Description
 This is a bolierplate code for the java based implementation of parking lot problem statement described below. 
 This code will be given to a candidate coming for an onsite interview so that they can tak take the implementation forward. 
 
