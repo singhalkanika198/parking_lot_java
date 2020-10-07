@@ -99,18 +99,18 @@ public class ParkingLotCommandHandler {
             return;
         }
 
-        Map<Integer, ParkingSlot> occupiedSlotMap = new HashMap<>();
+        Map<Integer, ParkingSlot> occupiedSlotsMap = new HashMap<>();
         for (ParkingSlot occupiedSlot : parkingLot.getOccupiedSlots()) {
-            occupiedSlotMap.put(occupiedSlot.getSlotNumber(), occupiedSlot);
+            occupiedSlotsMap.put(occupiedSlot.getSlotNumber(), occupiedSlot);
         }
 
         System.out.println(SLOT_NO + "    " + REGISTRATION_NO + "    " + Color);
         for (int i = 1; i <= parkingLot.getNumSlots(); i++) {
-            if (occupiedSlotMap.containsKey(i)) {
+            if (occupiedSlotsMap.containsKey(i)) {
                 System.out.println(
                         StringUtils.rightPadSpaces(Integer.toString(i), SLOT_NO.length()) + "    " +
-                                StringUtils.rightPadSpaces(occupiedSlotMap.get(i).getCar().getRegistrationNumber(), REGISTRATION_NO.length()) + "    " +
-                                occupiedSlotMap.get(i).getCar().getColor());
+                                StringUtils.rightPadSpaces(occupiedSlotsMap.get(i).getCar().getRegistrationNumber(), REGISTRATION_NO.length()) + "    " +
+                                occupiedSlotsMap.get(i).getCar().getColor());
             } else {
                 System.out.println(
                         StringUtils.rightPadSpaces(Integer.toString(i), SLOT_NO.length()) + "    " +
