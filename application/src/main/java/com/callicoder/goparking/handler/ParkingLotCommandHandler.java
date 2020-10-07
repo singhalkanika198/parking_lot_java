@@ -2,13 +2,16 @@ package com.callicoder.goparking.handler;
 
 import com.callicoder.goparking.domain.Car;
 import com.callicoder.goparking.domain.ParkingLot;
+import com.callicoder.goparking.domain.ParkingSlot;
 import com.callicoder.goparking.domain.Ticket;
 import com.callicoder.goparking.exceptions.ParkingLotFullException;
 import com.callicoder.goparking.exceptions.SlotAlreadyLeftException;
 import com.callicoder.goparking.exceptions.SlotNotFoundException;
 import com.callicoder.goparking.utils.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -96,13 +99,24 @@ public class ParkingLotCommandHandler {
             return;
         }
 
+        Map<Integer, ParkingSlot> occupiedSlotMap = new HashMap<>();
+        for (ParkingSlot occupiedSlot : parkingLot.getOccupiedSlots()) {
+            occupiedSlotMap.put(occupiedSlot.getSlotNumber(), occupiedSlot);
+        }
+
         System.out.println(SLOT_NO + "    " + REGISTRATION_NO + "    " + Color);
-        parkingLot.getOccupiedSlots().forEach(parkingSlot -> {
-            System.out.println(
-                    StringUtils.rightPadSpaces(Integer.toString(parkingSlot.getSlotNumber()), SLOT_NO.length()) + "    " +
-                            StringUtils.rightPadSpaces(parkingSlot.getCar().getRegistrationNumber(), REGISTRATION_NO.length()) + "    " +
-                            parkingSlot.getCar().getColor());
-        });
+        for (int i = 1; i <= parkingLot.getNumSlots(); i++) {
+            if (occupiedSlotMap.containsKey(i)) {
+                System.out.println(
+                        StringUtils.rightPadSpaces(Integer.toString(i), SLOT_NO.length()) + "    " +
+                                StringUtils.rightPadSpaces(occupiedSlotMap.get(i).getCar().getRegistrationNumber(), REGISTRATION_NO.length()) + "    " +
+                                occupiedSlotMap.get(i).getCar().getColor());
+            } else {
+                System.out.println(
+                        StringUtils.rightPadSpaces(Integer.toString(i), SLOT_NO.length()) + "    " +
+                                StringUtils.rightPadSpaces(" - ", REGISTRATION_NO.length()) + "    " + "-");
+            }
+        }
     }
 
     /**
