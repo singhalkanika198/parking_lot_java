@@ -8,6 +8,8 @@ import com.callicoder.goparking.interaction.commands.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.callicoder.goparking.utils.MessageConstants.*;
+
 public class CommandFactory {
     private Map<String, Command> commands;
 
@@ -18,13 +20,13 @@ public class CommandFactory {
     public static CommandFactory init(ParkingLotCommandHandler parkingLotCommandHandler) {
         final CommandFactory cf = new CommandFactory();
 
-        cf.addCommand("create_parking_lot", new CreateLotCommand(parkingLotCommandHandler));
-        cf.addCommand("park", new ParkCommand(parkingLotCommandHandler));
-        cf.addCommand("status", new StatusCommand(parkingLotCommandHandler));
-        cf.addCommand("leave", new ParkingSpotLeaveCommand(parkingLotCommandHandler));
-        cf.addCommand("registration_numbers_for_cars_with_colour", new RegistrationNumbersForCarsWithColourCommand(parkingLotCommandHandler));
-        cf.addCommand("slot_numbers_for_cars_with_colour", new SlotNumbersForCarsWithColourCommand(parkingLotCommandHandler));
-        cf.addCommand("slot_number_for_registration_number", new SlotNumberForRegistrationNumberCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_CREATE_COMMAND, new CreateLotCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_PARK_COMMAND, new ParkCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_STATUS_COMMAND, new StatusCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_LEAVE_COMMAND, new ParkingSpotLeaveCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR_COMMAND, new RegistrationNumbersForCarsWithColourCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_SLOT_NUMBERS_FOR_CARS_WITH_COLOUR_COMMAND, new SlotNumbersForCarsWithColourCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_SLOT_NUMBER_FOR_REGISTRATION_NUMBER_COMMAND, new SlotNumberForRegistrationNumberCommand(parkingLotCommandHandler));
         return cf;
     }
 
@@ -33,7 +35,7 @@ public class CommandFactory {
     }
 
     public void executeCommand(String name, String[] params) throws CommandNotFoundException, InvalidParameterException {
-        if (name.equalsIgnoreCase("help")) {
+        if (name.equalsIgnoreCase(PARKING_LOT_HELP_COMMAND)) {
             listCommandHelp();
             return;
         }

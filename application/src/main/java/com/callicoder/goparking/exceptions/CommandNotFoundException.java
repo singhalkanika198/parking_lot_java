@@ -1,5 +1,7 @@
 package com.callicoder.goparking.exceptions;
 
+import static com.callicoder.goparking.utils.MessageConstants.PARKING_LOT_HELP_COMMAND;
+
 public class CommandNotFoundException extends Exception {
     private String name;
 
@@ -9,6 +11,6 @@ public class CommandNotFoundException extends Exception {
 
     @Override
     public String getMessage() {
-        return "Command " + name + " not found";
+        return name + " is not a valid command. See: " + PARKING_LOT_HELP_COMMAND;
     }
 }

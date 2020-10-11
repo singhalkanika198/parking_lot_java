@@ -6,6 +6,7 @@ import com.callicoder.goparking.handler.ParkingLotCommandHandler;
 import com.callicoder.goparking.interaction.commands.Command;
 import org.junit.jupiter.api.Test;
 
+import static com.callicoder.goparking.utils.MessageConstants.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,9 +18,9 @@ public class CommandFactoryTests {
         CommandFactory commandFactory = CommandFactory.init(parkingLotCommandHandler);
 
 
-        assertTrue(commandFactory.getCommands().keySet().contains("create_parking_lot"));
-        assertTrue(commandFactory.getCommands().keySet().contains("park"));
-        assertTrue(commandFactory.getCommands().keySet().contains("status"));
+        assertTrue(commandFactory.getCommands().keySet().contains(PARKING_LOT_CREATE_COMMAND));
+        assertTrue(commandFactory.getCommands().keySet().contains(PARKING_LOT_PARK_COMMAND));
+        assertTrue(commandFactory.getCommands().keySet().contains(PARKING_LOT_STATUS_COMMAND));
     }
 
     @Test

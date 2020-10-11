@@ -19,7 +19,7 @@ RSpec.describe 'Parking Lot', type: :aruba do
     command.write("park KA-01-HH-3141 Black\n")
     command.write("leave 1\n")
     stop_all_commands
-    expect(command.output).to end_with("Slot number 1 is free\n")
+    expect(command.output).to end_with("Vacated slot number: 1\n")
   end
   
   it "can report status" do
