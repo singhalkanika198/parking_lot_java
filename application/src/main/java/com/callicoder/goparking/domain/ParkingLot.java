@@ -134,9 +134,6 @@ public class ParkingLot {
         }
 
         Duration duration = Duration.between(entryTime, LocalDateTime.now());
-        System.out.println("entry time = " + entryTime);
-        System.out.println("now time = " + LocalDateTime.now());
-        System.out.println("duration minutes " + duration.toMinutes());
         if (duration.toMinutes() < 0) {
             throw new IllegalArgumentException("Entry time of the car can not greater than the current time.");
         } else if (duration.toMinutes() > 1) {
