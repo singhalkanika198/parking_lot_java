@@ -15,6 +15,7 @@ public interface MessageConstants {
 
     String Color = "Colour";
     String DUPLICATE_CAR_MESSAGE = "A car already parked with this registration number";
+    String CAR_NOT_FOUND = "A car is not parked with this registration number in parking lot";
     String NOT_FOUND = "Not found";
 
     String INTERNAL_SERVER_ERROR = "No worries! Something went wrong. Kindly try again.";
@@ -28,4 +29,7 @@ public interface MessageConstants {
     String PARKING_LOT_REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR_COMMAND = "registration_numbers_for_cars_with_colour";
     String PARKING_LOT_SLOT_NUMBERS_FOR_CARS_WITH_COLOUR_COMMAND = "slot_numbers_for_cars_with_colour";
     String PARKING_LOT_SLOT_NUMBER_FOR_REGISTRATION_NUMBER_COMMAND = "slot_number_for_registration_number";
+    String PARKING_LOT_PARK_WITH_TIME_COMMAND = "park_with_time";
+    String PARKING_LOT_LEAVE_WITH_TIME_COMMAND = "leave_with_time";
+    Integer PARKING_CHARGES_PER_HOUR = 20;
 }

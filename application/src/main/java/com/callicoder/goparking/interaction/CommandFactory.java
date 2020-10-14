@@ -27,6 +27,8 @@ public class CommandFactory {
         cf.addCommand(PARKING_LOT_REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR_COMMAND, new RegistrationNumbersForCarsWithColourCommand(parkingLotCommandHandler));
         cf.addCommand(PARKING_LOT_SLOT_NUMBERS_FOR_CARS_WITH_COLOUR_COMMAND, new SlotNumbersForCarsWithColourCommand(parkingLotCommandHandler));
         cf.addCommand(PARKING_LOT_SLOT_NUMBER_FOR_REGISTRATION_NUMBER_COMMAND, new SlotNumberForRegistrationNumberCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_PARK_WITH_TIME_COMMAND, new ParkWithTimeCommand(parkingLotCommandHandler));
+        cf.addCommand(PARKING_LOT_LEAVE_WITH_TIME_COMMAND, new LeaveWithTimeCommand(parkingLotCommandHandler));
         return cf;
     }
 

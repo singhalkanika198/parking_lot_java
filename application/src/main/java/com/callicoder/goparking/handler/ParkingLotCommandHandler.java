@@ -9,6 +9,7 @@ import com.callicoder.goparking.exceptions.SlotAlreadyLeftException;
 import com.callicoder.goparking.exceptions.SlotNotFoundException;
 import com.callicoder.goparking.utils.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -232,5 +233,64 @@ public class ParkingLotCommandHandler {
             return false;
         }
         return true;
+    }
+
+    /**
+     * It parks a car with given registration number and color in parking lot along with the time stamp.
+     *
+     * @param registrationNumber of car.
+     * @param color              of car.
+     * @param entryTime          of car.
+     */
+    public void parkWithTime(String registrationNumber, String color, LocalDateTime entryTime) {
+        try {
+            if (!isParkingLotCreated()) {
+                System.out.println(PARKING_LOT_NOT_CREATED);
+                return;
+            }
+            Car car = new Car(registrationNumber, color);
+            boolean isCarAlreadyParked = isCarAlreadyParked(car);
+            if (isCarAlreadyParked) {
+                System.out.println(String.format(DUPLICATE_CAR_MESSAGE, registrationNumber));
+                return;
+            }
+            Ticket ticket = parkingLot.reserveSlotWithTime(car, entryTime);
+            System.out.println(String.format(PARKING_SLOT_ALLOCATED_MSG, ticket.getSlotNumber()) + " at " + entryTime.toString());
+        } catch (IllegalArgumentException ex) {
+            // Error log for developers can be printed here.
+            System.out.println("Bad input: " + ex.getMessage());
+        } catch (ParkingLotFullException ex) {
+            // Error log for developers can be printed here.
+            System.out.println(PARKING_LOT_FULL_MSG);
+        }
+    }
+
+    /**
+     * It leaves a car with given registration number and color in parking lot along with the time stamp.
+     *
+     * @param registrationNumber of car.
+     * @param color              of car.
+     */
+    public void leaveWithTime(String registrationNumber, String color, LocalDateTime entryTime) {
+        try {
+            if (!isParkingLotCreated()) {
+                System.out.println(PARKING_LOT_NOT_CREATED);
+                return;
+            }
+            Car car = new Car(registrationNumber, color);
+            boolean isCarAlreadyParked = isCarAlreadyParked(car);
+            if (!isCarAlreadyParked) {
+                System.out.println(String.format(CAR_NOT_FOUND, registrationNumber));
+                return;
+            }
+            Ticket ticket = parkingLot.exitCarWithTime(car, entryTime);
+            System.out.println(String.format(PARKING_SLOT_VACATED_MSG, ticket.getSlotNumber()) + " charges to be paid: " + ticket.getParkingCharges());
+        } catch (IllegalArgumentException ex) {
+            // Error log for developers can be printed here.
+            System.out.println("Bad input: " + ex.getMessage());
+        } catch (ParkingLotFullException ex) {
+            // Error log for developers can be printed here.
+            System.out.println(PARKING_LOT_FULL_MSG);
+        }
     }
 }
